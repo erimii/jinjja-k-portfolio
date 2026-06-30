@@ -3,669 +3,955 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>JinJJa-K / K+DUCK Home 개발 포트폴리오</title>
-  <meta name="description" content="K-drama 숏폼 학습 서비스 K+DUCK Home 개발 포트폴리오. Public app, Scene Decoder, My Room, Admin Console, Analytics, Push Automation, Security 구현 사례." />
+  <title>JinJJa-K 프로젝트 포트폴리오</title>
   <style>
     :root {
-      --ink: #111827;
-      --sub: #475467;
-      --muted: #667085;
-      --paper: #f6f8fb;
-      --card: #ffffff;
-      --line: #d9e0ea;
-      --dark: #0d1424;
-      --dark-2: #172033;
-      --yellow: #ffc400;
-      --yellow-soft: #fff4bd;
-      --blue: #2f6fed;
-      --mint: #16a085;
-      --rose: #e7567c;
-      --green: #4f8a60;
-      --max: 1180px;
+      --ink: #171717;
+      --paper: #fbf6ea;
+      --paper-2: #fffaf0;
+      --line: #dfd2bb;
+      --soft: #eee2cc;
+      --muted: #685f51;
+      --dark: #121516;
+      --dark-2: #1c2022;
+      --yellow: #ffc928;
+      --blue: #3d8dda;
+      --green: #5c806a;
+      --rose: #d86f68;
       --radius: 8px;
-      --shadow: 0 24px 80px rgba(17, 24, 39, .10);
+      --max: 1120px;
     }
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body {
       margin: 0;
-      color: var(--ink);
       background: var(--paper);
+      color: var(--ink);
       font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", "Segoe UI", sans-serif;
+      font-size: 16px;
       line-height: 1.68;
       word-break: keep-all;
-      letter-spacing: 0;
     }
     a { color: inherit; }
-    img { max-width: 100%; display: block; }
-    h1, h2, h3, h4, p { margin: 0; }
-    h1, h2, h3 { line-height: 1.08; letter-spacing: 0; }
-    p + p { margin-top: 14px; }
-    .hero {
+    h1, h2, h3, p { margin: 0; }
+    h1, h2, h3 { letter-spacing: 0; line-height: 1.08; }
+    .cover {
       min-height: 100vh;
-      color: #f8fafc;
       background:
-        radial-gradient(circle at 80% 10%, rgba(47,111,237,.38), transparent 28%),
-        linear-gradient(115deg, #0d1424 0%, #141c2e 50%, #0b101a 100%);
-      padding: 54px max(28px, calc((100vw - var(--max)) / 2)) 44px;
+        linear-gradient(100deg, rgba(255,201,40,.15), transparent 38%),
+        linear-gradient(180deg, var(--dark), #0e0f10);
+      color: #fff7e3;
       display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(430px, .9fr);
-      gap: 48px;
+      grid-template-columns: minmax(0, 1.02fr) minmax(340px, .98fr);
+      gap: 42px;
       align-items: center;
+      padding: 58px max(28px, calc((100vw - var(--max)) / 2)) 46px;
       overflow: hidden;
     }
-    .kicker {
+    .cover-kicker {
       display: inline-flex;
       align-items: center;
-      gap: 11px;
-      color: #cbd5e1;
-      font-weight: 850;
+      gap: 12px;
+      color: #d8cfbd;
       font-size: .82rem;
-      text-transform: uppercase;
+      font-weight: 800;
     }
-    .kicker::before {
+    .cover-kicker::before {
       content: "";
-      width: 46px;
+      display: inline-block;
+      width: 42px;
       height: 6px;
       border-radius: 99px;
       background: var(--yellow);
     }
-    .brand {
-      margin-top: 22px;
-      font-size: clamp(4.2rem, 9.5vw, 8rem);
+    h1 {
+      margin-top: 20px;
+      font-size: clamp(4.2rem, 10vw, 8.4rem);
       color: white;
     }
-    .brand .plus { color: var(--yellow); }
-    .hero-title {
+    .cover-subtitle {
       margin-top: 18px;
-      max-width: 760px;
-      font-size: clamp(1.55rem, 3vw, 2.55rem);
-      line-height: 1.28;
-      font-weight: 850;
+      max-width: 720px;
+      font-size: clamp(1.32rem, 2.3vw, 2.05rem);
+      line-height: 1.35;
+      font-weight: 800;
     }
-    .hero-copy {
+    .cover-copy {
       margin-top: 22px;
-      max-width: 760px;
-      color: #d4dce8;
-      font-size: 1.06rem;
+      max-width: 720px;
+      color: #d7d0c0;
+      font-size: 1.05rem;
     }
-    .hero-actions {
-      margin-top: 28px;
-      display: flex;
+    .cover-meta {
+      margin-top: 32px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 12px;
-      flex-wrap: wrap;
     }
-    .button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 42px;
-      padding: 10px 16px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.24);
-      color: #f8fafc;
-      text-decoration: none;
-      font-weight: 850;
-      background: rgba(255,255,255,.08);
+    .meta-card {
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.06);
+      border-radius: var(--radius);
+      padding: 18px;
+      min-height: 136px;
     }
-    .button.primary {
-      color: #111827;
-      background: var(--yellow);
-      border-color: var(--yellow);
+    .meta-card span {
+      display: block;
+      color: #bdb4a4;
+      font-size: .8rem;
+      font-weight: 800;
+      margin-bottom: 12px;
     }
-    .hero-visual {
+    .meta-card strong {
+      display: block;
+      color: white;
+      line-height: 1.22;
+      font-size: 1.15rem;
+    }
+    .cover-visual {
       position: relative;
-      min-height: 690px;
+      min-height: 650px;
       display: grid;
       place-items: center;
     }
-    .phone-stack {
-      position: relative;
-      width: 480px;
-      height: 650px;
-    }
     .phone {
-      position: absolute;
-      width: 235px;
-      aspect-ratio: 430 / 932;
-      border: 9px solid #050505;
-      border-radius: 34px;
+      position: relative;
+      width: min(370px, 86vw);
+      aspect-ratio: 390 / 844;
+      border-radius: 42px;
+      border: 10px solid #050505;
       overflow: hidden;
       background: #050505;
-      box-shadow: 0 36px 80px rgba(0,0,0,.42);
+      box-shadow: 0 42px 90px rgba(0,0,0,.55);
+      z-index: 2;
     }
-    .phone img { width: 100%; height: 100%; object-fit: cover; }
-    .phone.one { left: 30px; top: 45px; transform: rotate(-4deg); }
-    .phone.two { right: 32px; top: 20px; transform: rotate(3deg); }
-    .floating-note {
+    .phone img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .cover-note {
       position: absolute;
-      left: 150px;
-      bottom: 22px;
-      width: 265px;
+      right: 0;
+      bottom: 72px;
+      width: 260px;
       padding: 18px;
       border-radius: var(--radius);
-      background: rgba(255,255,255,.94);
-      color: var(--ink);
-      box-shadow: var(--shadow);
-      border: 1px solid rgba(255,255,255,.8);
+      background: #fff8e6;
+      color: #171717;
+      border: 1px solid rgba(255,255,255,.4);
+      box-shadow: 0 24px 70px rgba(0,0,0,.35);
+      z-index: 3;
     }
-    .floating-note b { display: block; margin-bottom: 6px; }
-    .floating-note span { color: var(--sub); font-size: .92rem; line-height: 1.48; }
+    .cover-note b { display: block; font-size: 1.05rem; margin-bottom: 7px; }
+    .cover-note span { display: block; color: #5f594e; line-height: 1.45; }
     .nav {
       position: sticky;
       top: 0;
-      z-index: 20;
+      z-index: 8;
       border-bottom: 1px solid var(--line);
-      background: rgba(246,248,251,.88);
-      backdrop-filter: blur(16px);
+      background: rgba(251,246,234,.92);
+      backdrop-filter: blur(14px);
     }
     .nav-inner {
       max-width: var(--max);
       margin: 0 auto;
-      padding: 12px 28px;
+      padding: 13px 28px;
       display: flex;
-      gap: 16px;
+      gap: 18px;
       align-items: center;
       overflow-x: auto;
       white-space: nowrap;
     }
     .nav strong { margin-right: auto; }
     .nav a {
-      color: var(--sub);
+      color: var(--muted);
+      font-weight: 800;
       text-decoration: none;
-      font-size: .88rem;
-      font-weight: 850;
+      font-size: .9rem;
     }
     .section {
       max-width: var(--max);
       margin: 0 auto;
-      padding: 76px 28px;
-      border-bottom: 1px solid var(--line);
+      padding: 72px 28px;
       display: grid;
-      grid-template-columns: 215px minmax(0, 1fr);
-      gap: 38px;
+      grid-template-columns: 210px minmax(0, 1fr);
+      gap: 36px;
+      border-bottom: 1px solid var(--line);
     }
     .section-label {
-      color: var(--muted);
-      font-size: .78rem;
-      text-transform: uppercase;
-      font-weight: 900;
-      line-height: 1.3;
       padding-top: 8px;
+      color: var(--muted);
+      text-transform: uppercase;
+      font-size: .78rem;
+      line-height: 1.25;
+      font-weight: 900;
     }
     .section-label span {
       display: block;
       color: var(--yellow);
-      font-size: 1.45rem;
+      font-size: 1.35rem;
       margin-bottom: 8px;
     }
     h2 {
-      max-width: 860px;
-      font-size: clamp(2.18rem, 4vw, 3.8rem);
+      max-width: 820px;
+      font-size: clamp(2.25rem, 4vw, 3.8rem);
       margin-bottom: 22px;
     }
-    h3 { font-size: 1.42rem; margin-bottom: 12px; }
-    h4 { font-size: .94rem; margin-bottom: 8px; color: var(--sub); text-transform: uppercase; }
     .lead {
-      max-width: 860px;
-      font-size: 1.12rem;
-      color: #344054;
+      max-width: 820px;
+      color: #38342d;
+      font-size: 1.14rem;
+      line-height: 1.82;
     }
-    .cards {
+    .lead + .lead { margin-top: 14px; }
+    .summary-grid {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 14px;
-      margin-top: 30px;
+      gap: 12px;
+      margin-top: 28px;
     }
-    .card {
-      background: var(--card);
+    .summary-card {
+      background: var(--paper-2);
       border: 1px solid var(--line);
       border-radius: var(--radius);
-      padding: 20px;
-      box-shadow: 0 12px 34px rgba(17,24,39,.04);
+      padding: 18px;
+      min-height: 140px;
     }
-    .card.dark {
-      background: var(--dark);
-      border-color: var(--dark);
-      color: white;
-    }
-    .card.dark p, .card.dark li { color: #d7dee9; }
-    .metric b {
-      display: block;
-      font-size: 1.65rem;
-      line-height: 1.05;
-      margin-bottom: 10px;
-    }
-    .metric span { color: var(--sub); font-size: .9rem; }
+    .summary-card b { display: block; font-size: 1.05rem; line-height: 1.25; margin-bottom: 8px; }
+    .summary-card span { color: var(--muted); font-weight: 720; font-size: .92rem; line-height: 1.45; }
     .split {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 18px;
-      margin-top: 28px;
+      margin-top: 26px;
     }
-    .triple {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 16px;
-      margin-top: 28px;
+    .panel {
+      background: var(--paper-2);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 24px;
     }
-    ul { margin: 12px 0 0; padding-left: 20px; }
-    li { margin: 7px 0; color: #344054; }
-    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
-    .tags span {
-      display: inline-flex;
+    .panel.dark {
+      background: var(--dark);
+      color: #fff4df;
+      border-color: var(--dark);
+    }
+    .panel h3 { font-size: 1.45rem; margin-bottom: 12px; }
+    .panel p, .panel li { color: #4d463b; }
+    .panel.dark p, .panel.dark li { color: #d7cebc; }
+    .panel ul { padding-left: 18px; margin: 14px 0 0; }
+    .panel li { margin: 7px 0; }
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+    .tag {
       border-radius: 999px;
+      border: 1px solid var(--line);
+      background: #fffaf0;
+      color: #524a3d;
       padding: 5px 10px;
-      background: #eef4ff;
-      border: 1px solid #d6e4ff;
-      color: #1849a9;
-      font-size: .8rem;
-      font-weight: 850;
+      font-size: .82rem;
+      font-weight: 820;
     }
-    .image-grid {
+    .journey {
+      margin-top: 28px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .journey-card {
+      position: relative;
+      border-radius: var(--radius);
+      padding: 22px;
+      min-height: 245px;
+      background: var(--paper-2);
+      border: 1px solid var(--line);
+    }
+    .journey-card::before {
+      content: attr(data-step);
+      display: inline-grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--yellow);
+      color: #111;
+      font-weight: 950;
+      margin-bottom: 16px;
+    }
+    .journey-card h3 { font-size: 1.55rem; margin-bottom: 10px; }
+    .journey-card p { color: #4d463b; }
+    .image-strip {
+      display: grid;
+      grid-template-columns: 1.08fr .92fr;
+      gap: 18px;
+      margin-top: 28px;
+      align-items: stretch;
+    }
+    .showcase {
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: #111;
+      min-height: 540px;
+      display: grid;
+      place-items: center;
+    }
+    .showcase img {
+      width: 100%;
+      height: 100%;
+      max-height: 640px;
+      object-fit: contain;
+      display: block;
+    }
+    .caption-box {
+      background: var(--dark);
+      color: #fff4de;
+      border-radius: var(--radius);
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .caption-box h3 { font-size: 2rem; margin-bottom: 12px; }
+    .caption-box p { color: #d9d1c1; }
+    .info-list { margin-top: 26px; border-top: 1px solid rgba(255,255,255,.16); }
+    .info-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      border-bottom: 1px solid rgba(255,255,255,.16);
+      padding: 12px 0;
+    }
+    .info-row span { color: #bdb4a4; }
+    .info-row strong { text-align: right; }
+    .points {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 26px;
+    }
+    .point {
+      padding: 22px;
+      background: var(--paper-2);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      min-height: 188px;
+    }
+    .point h3 { font-size: 1.28rem; margin-bottom: 10px; }
+    .point p { color: #4b4439; }
+    .gallery {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 16px;
-      margin-top: 30px;
+      margin-top: 28px;
     }
     .shot {
-      background: white;
+      background: var(--paper-2);
       border: 1px solid var(--line);
       border-radius: var(--radius);
-      padding: 12px;
-      box-shadow: var(--shadow);
+      overflow: hidden;
+      margin: 0;
+      break-inside: avoid;
     }
+    .shot-media {
+      height: 390px;
+      background: #121212;
+      display: grid;
+      place-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .shot.wide .shot-media { height: 270px; }
     .shot img {
       width: 100%;
-      height: 400px;
-      object-fit: cover;
-      border-radius: 6px;
-      background: #0b0f17;
-    }
-    .shot.wide img { height: 250px; }
-    .shot.tall img { object-position: top center; }
-    .caption {
-      display: block;
-      margin-top: 10px;
-      color: var(--muted);
-      font-size: .86rem;
-      line-height: 1.4;
-    }
-    .feature-row {
-      display: grid;
-      grid-template-columns: .95fr 1.05fr;
-      gap: 24px;
-      align-items: center;
-      margin-top: 34px;
-    }
-    .feature-row.reverse { grid-template-columns: 1.05fr .95fr; }
-    .feature-image {
-      border-radius: var(--radius);
-      border: 1px solid var(--line);
-      background: white;
-      padding: 14px;
-      box-shadow: var(--shadow);
-    }
-    .feature-image img {
-      width: 100%;
-      max-height: 520px;
+      height: 100%;
       object-fit: contain;
-      border-radius: 6px;
-      background: #0b0f17;
+      display: block;
+      position: absolute;
+      inset: 0;
     }
-    .callout {
-      margin-top: 24px;
-      padding: 24px;
-      border-radius: var(--radius);
-      border: 1px solid #fde68a;
-      background: linear-gradient(135deg, #fff7cd, #fff);
-    }
-    .system {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-      margin-top: 28px;
+    figcaption {
+      padding: 15px 16px 17px;
+      background: var(--paper-2);
       position: relative;
+      z-index: 1;
     }
-    .system .card {
-      min-height: 160px;
-      border-top: 5px solid var(--yellow);
-    }
-    .system .card:nth-child(2) { border-top-color: var(--blue); }
-    .system .card:nth-child(3) { border-top-color: var(--mint); }
-    .system .card:nth-child(4) { border-top-color: var(--rose); }
-    .system .card:nth-child(5) { border-top-color: var(--green); }
-    .system .card:nth-child(6) { border-top-color: #7c3aed; }
-    .story {
+    figcaption strong { display: block; margin-bottom: 6px; font-size: 1rem; }
+    figcaption span { color: var(--muted); font-size: .91rem; line-height: 1.48; }
+    .stacked {
       display: grid;
-      grid-template-columns: 160px minmax(0, 1fr);
-      gap: 22px;
+      gap: 16px;
+      margin-top: 26px;
+    }
+    .evidence {
+      background: #161817;
+      color: #fff4df;
+      border-radius: var(--radius);
       padding: 22px;
-      border-radius: var(--radius);
-      border: 1px solid var(--line);
-      background: white;
-      margin-top: 16px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: .88rem;
+      line-height: 1.65;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
     }
-    .story-label {
-      font-weight: 900;
-      color: var(--blue);
-      text-transform: uppercase;
-      font-size: .82rem;
-    }
-    .resume {
-      background: #111827;
-      color: #f8fafc;
-      padding: 32px;
-      border-radius: var(--radius);
-      margin-top: 28px;
-    }
-    .resume h3 { color: white; }
-    .resume p, .resume li { color: #d6dde8; }
-    .resume code {
-      color: #111827;
-      background: var(--yellow);
-      padding: 2px 5px;
-      border-radius: 5px;
-    }
-    .footer {
+    .closing {
       max-width: var(--max);
       margin: 0 auto;
-      padding: 40px 28px 64px;
-      color: var(--muted);
-      font-size: .9rem;
+      padding: 80px 28px 100px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      align-items: end;
     }
-    .print-note { display: none; }
-    @media (max-width: 980px) {
-      .hero, .section, .feature-row, .feature-row.reverse { grid-template-columns: 1fr; }
-      .hero-visual { min-height: 560px; }
-      .section-label { padding-top: 0; }
-      .cards, .image-grid, .triple, .system { grid-template-columns: 1fr 1fr; }
-      .split { grid-template-columns: 1fr; }
+    .closing h2 { margin-bottom: 18px; }
+    .closing p { color: #403b33; font-size: 1.08rem; }
+    .closing-card {
+      border-radius: var(--radius);
+      background: var(--dark);
+      color: #fff4de;
+      padding: 28px;
     }
-    @media (max-width: 640px) {
-      .hero { grid-template-columns: 1fr; padding-top: 40px; }
-      .phone-stack { width: 340px; height: 520px; }
-      .phone { width: 180px; }
-      .phone.one { left: 0; }
-      .phone.two { right: 0; }
-      .floating-note { left: 56px; bottom: 0; }
-      .cards, .image-grid, .triple, .system { grid-template-columns: 1fr; }
-      .story { grid-template-columns: 1fr; }
-      .nav-inner { padding-inline: 18px; }
-    }
-    @page { size: A4 landscape; margin: 10mm; }
-    @media print {
-      body { background: white; font-size: 12px; line-height: 1.5; }
-      .nav, .hero-actions { display: none; }
-      .hero {
-        min-height: auto;
-        page-break-after: always;
-        padding: 24px;
-        grid-template-columns: 1fr .8fr;
+    .closing-card b { display: block; font-size: 1.35rem; margin-bottom: 12px; }
+    .closing-card span { display: block; color: #d7cebc; }
+    @media (max-width: 900px) {
+      .cover, .section, .closing, .split, .journey, .image-strip, .points, .gallery {
+        grid-template-columns: 1fr;
       }
-      .brand { font-size: 56px; }
-      .hero-title { font-size: 24px; }
-      .hero-visual { min-height: 430px; }
-      .phone-stack { transform: scale(.72); transform-origin: top center; height: 470px; }
+      .cover { min-height: auto; }
+      .cover-meta, .summary-grid { grid-template-columns: 1fr; }
+      .cover-visual { min-height: 540px; }
+      .cover-note { left: 0; right: auto; bottom: 20px; }
+      .section { gap: 18px; padding: 58px 22px; }
+      .nav-inner { padding: 12px 22px; }
+    }
+    @page { size: A4; margin: 0; }
+    @media print {
+      body { background: #fff; font-size: 10.5pt; line-height: 1.52; }
+      .nav { display: none; }
+      .cover {
+        min-height: 100vh;
+        padding: 30mm 14mm 18mm;
+        grid-template-columns: 1.05fr .95fr;
+        gap: 14mm;
+        page-break-after: always;
+      }
+      h1 { font-size: 58pt; }
+      .cover-subtitle { font-size: 18pt; }
+      .cover-copy { font-size: 10.8pt; }
+      .cover-meta { grid-template-columns: 1fr; gap: 7px; }
+      .meta-card { min-height: auto; padding: 11px 13px; }
+      .cover-visual { min-height: 0; }
+      .phone { width: 58mm; border-radius: 28px; border-width: 7px; }
+      .cover-note { width: 58mm; right: -2mm; bottom: 22mm; padding: 12px; }
       .section {
         max-width: none;
-        padding: 18px 10px;
-        grid-template-columns: 150px 1fr;
-        break-inside: auto;
-        page-break-inside: auto;
+        padding: 15mm 14mm;
+        grid-template-columns: 36mm 1fr;
+        gap: 8mm;
+        break-inside: avoid;
+        border-bottom-color: #e5dac8;
       }
-      h2 { font-size: 28px; margin-bottom: 14px; }
-      h3 { font-size: 18px; }
-      .lead { font-size: 13px; }
-      .card { box-shadow: none; }
-      .shot, .feature-image { box-shadow: none; }
-      .cards, .image-grid, .triple, .system { gap: 10px; }
-      .shot { padding: 8px; }
-      .shot img { height: 205px; }
-      .shot.wide img { height: 145px; }
-      .feature-image img { max-height: 280px; }
-      .feature-row, .feature-row.reverse { gap: 14px; margin-top: 18px; }
-      .story { padding: 14px; margin-top: 10px; }
-      .resume { padding: 22px; }
-      .print-note { display: block; color: #667085; }
+      h2 { font-size: 24pt; margin-bottom: 12px; }
+      .lead { font-size: 10.8pt; }
+      .summary-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+      .summary-card { min-height: 98px; padding: 12px; }
+      .split, .journey, .points { gap: 9px; }
+      .journey { grid-template-columns: repeat(3, 1fr); }
+      .journey-card { min-height: 205px; padding: 14px; }
+      .image-strip { grid-template-columns: 1fr 1fr; gap: 10px; }
+      .showcase { min-height: 96mm; }
+      .caption-box { padding: 14px; }
+      .caption-box h3 { font-size: 18pt; }
+      .caption-box p { font-size: 9.8pt; line-height: 1.45; }
+      .gallery { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .shot-media { height: 70mm; }
+      .shot.wide .shot-media { height: 50mm; }
+      figcaption { padding: 9px 10px 11px; }
+      .point { min-height: 0; padding: 12px; }
+      .point h3 { font-size: 12.8pt; margin-bottom: 6px; }
+      .point p { font-size: 9.4pt; line-height: 1.45; }
+      .closing {
+        padding: 18mm 14mm 24mm;
+        grid-template-columns: 1fr 1fr;
+      }
+      .page-break { page-break-before: always; }
     }
   </style>
 </head>
 <body>
-  <header class="hero" id="top">
+  <header class="cover">
     <div>
-      <div class="kicker">Development Portfolio · 2026.06.30</div>
-      <h1 class="brand"><span class="plus">K+</span>DUCK</h1>
-      <p class="hero-title">K-drama 숏폼 장면을 보면서, 자막 너머의 진짜 의미를 디코딩하는 vertical learning service.</p>
-      <p class="hero-copy">이 포트폴리오는 K+DUCK Home 프로젝트에서 제가 실제로 구현한 public app UX, Scene Decoder, My Room 리텐션, admin console, analytics pipeline, push automation, security boundary를 하나의 case study로 정리한 제출용 문서입니다.</p>
-      <div class="hero-actions">
-        <a class="button primary" href="JinJJa-K-Portfolio.pdf">PDF 보기</a>
-        <a class="button" href="#screens">화면 캡처 보기</a>
-        <a class="button" href="#resume">이력서 문구 보기</a>
+      <span class="cover-kicker">제출용 프로젝트 포트폴리오</span>
+      <h1>JinJJa-K</h1>
+      <p class="cover-subtitle">K-drama 장면 학습을 웹 서비스와 Android 앱으로 제품화한 기록</p>
+      <p class="cover-copy">
+        시작은 MVP2의 장면 학습 실험이었다. 이후 독립 서비스인 kduck-home으로 운영 경계를 나누고,
+        마지막으로 kduck_react Android shell까지 연결했다. 이 문서는 그 과정에서 어떤 문제를 풀었고,
+        어떤 기준으로 설계했으며, 실제로 어디까지 출시 준비를 했는지를 정리한 포트폴리오다.
+      </p>
+      <div class="cover-meta">
+        <div class="meta-card"><span>흐름</span><strong>MVP2 kduck -> kduck-home -> kduck_react</strong></div>
+        <div class="meta-card"><span>담당 범위</span><strong>제품 흐름, 웹 구현, Cloudflare 런타임, Android shell, QA</strong></div>
+        <div class="meta-card"><span>핵심 결과</span><strong>장면 학습 루프와 네이티브 앱 출시 경로를 한 번에 연결</strong></div>
       </div>
     </div>
-    <div class="hero-visual" aria-label="K+DUCK app screenshots">
-      <div class="phone-stack">
-        <div class="phone one"><img src="images/kduck-02-home-feed-pin.png" alt="K+DUCK vertical video feed" /></div>
-        <div class="phone two"><img src="images/kduck-04-decoder-reveal.png" alt="K+DUCK scene decoder reveal" /></div>
-        <div class="floating-note"><b>Watch → Decode → Return</b><span>영상 몰입을 유지하면서도 우측 decoder pin으로 숨은 의미를 바로 열 수 있게 설계했습니다.</span></div>
+    <div class="cover-visual">
+      <div class="phone"><img src="./images/kduck-home-live-mobile.png" alt="kduck.net live screen" /></div>
+      <div class="cover-note">
+        <b>첫 화면에서 보여야 하는 것</b>
+        <span>영상, 자막, Decoder 진입, 알림 상태가 한 화면에서 읽히도록 정리했다.</span>
       </div>
     </div>
   </header>
 
   <nav class="nav">
     <div class="nav-inner">
-      <strong>K+DUCK Case Study</strong>
-      <a href="#overview">Overview</a>
-      <a href="#screens">Screens</a>
-      <a href="#ux">UX</a>
-      <a href="#system">System</a>
-      <a href="#admin">Admin</a>
-      <a href="#data">Data</a>
-      <a href="#security">Security</a>
-      <a href="#stories">Stories</a>
-      <a href="#resume">Resume</a>
+      <strong>JinJJa-K</strong>
+      <a href="#overview">개요</a>
+      <a href="#journey">제품화 흐름</a>
+      <a href="#work">구현 내용</a>
+      <a href="#screens">화면</a>
+      <a href="#release">출시 준비</a>
     </div>
   </nav>
 
   <main>
-    <section class="section" id="overview">
-      <aside class="section-label"><span>01</span>Project Overview</aside>
-      <div>
-        <h2>단순한 영상 앱이 아니라, 시청 경험과 운영 시스템을 함께 만든 프로젝트입니다.</h2>
-        <p class="lead">K+DUCK Home은 K-drama 숏폼 장면 위에 자막, 실제 뉘앙스, 한국 문화 맥락, 장면 trivia를 얹어 학습 경험으로 바꾸는 서비스입니다. 저는 public app, admin console, Cloudflare 기반 API/DB/Worker 흐름을 함께 다루며 제품이 사용자에게 보이는 표면과 운영자가 관리하는 뒷면을 동시에 구현했습니다.</p>
-        <div class="cards">
-          <div class="card metric"><b>4 workspaces</b><span>app, admin, retention worker, push worker를 하나의 monorepo로 관리</span></div>
-          <div class="card metric"><b>374 files</b><span>app/admin/worker/migrations/docs/scripts 기준 프로젝트 구성</span></div>
-          <div class="card metric"><b>78k+ lines</b><span>TypeScript, CSS, SQL, 문서 포함 코드/문서 규모</span></div>
-          <div class="card metric"><b>Cloudflare stack</b><span>Pages Functions, D1, R2, Workers, Access 기반 설계</span></div>
-        </div>
-        <div class="split">
-          <div class="card">
-            <h3>프로젝트 목표</h3>
-            <ul><li>K-drama 장면을 보면서 자막만으로 이해하기 어려운 말맛과 문화 맥락을 제공</li><li>영상 몰입을 해치지 않는 방식으로 decoder 기능을 자연스럽게 발견하게 만들기</li><li>콘텐츠 검수, 지표 분석, 오류 확인, Push 운영을 admin console에서 직접 처리</li><li>raw event 증가와 민감 데이터 접근을 고려한 데이터/보안 경계 설계</li></ul>
-          </div>
-          <div class="card dark">
-            <h3>제가 맡은 범위</h3>
-            <ul><li>React/TypeScript 기반 public app UX와 admin console UI 구현</li><li>Scene Decoder, My Room, splash motion, decoder pin sliver 등 핵심 사용자 경험 개선</li><li>analytics event ingest, sessions funnel, R2 raw event, retention/push worker 설계 정리</li><li>Cloudflare Access, allowlist, CSRF, audit, avatar validation 등 운영 보안 흐름 구현</li></ul>
-          </div>
-        </div>
-        <div class="tags"><span>React 19</span><span>TypeScript</span><span>Vite</span><span>Cloudflare Pages Functions</span><span>D1</span><span>R2</span><span>Workers</span><span>HLS</span><span>Admin Console</span><span>FCM Push</span></div>
+    <div id="overview"></div>
+    
+    <section class="section ">
+      <div class="section-label">
+        <span>01</span>
+        <b>Overview</b>
+      </div>
+      <div class="section-body">
+        <h2>프로젝트를 한 문장으로 말하면</h2>
+        
+      <p class="lead">
+        JinJJa-K는 K-drama 장면을 짧게 보고 넘기는 서비스가 아니라, 듣고 이해하고 다시 행동하게 만드는
+        장면 학습 제품이다. 사용자는 세로 영상을 보면서 한국어, 로마자, 영어 자막을 함께 보고,
+        Decoder에서 숨은 의미와 문화 맥락을 확인한 뒤, 저장하거나 다음 장면으로 이동한다.
+      </p>
+      <p class="lead">
+        내가 맡은 일은 화면 몇 개를 붙이는 것이 아니라, 실험으로 시작한 MVP를 실제 서비스와 앱 릴리스 구조로
+        옮기는 일이었다. 그래서 이 프로젝트의 핵심은 기능 구현만큼이나 경계 정리, 런타임 안정화, QA 흐름에 있다.
+      </p>
+      <div class="summary-grid">
+        <div class="summary-card"><b>학습 경험</b><span>scene watch, 3-track caption, Decoder, acting flow를 하나의 루프로 설계</span></div>
+        <div class="summary-card"><b>운영 웹</b><span>kduck-home을 MVP2와 분리하고 Cloudflare/D1 기반 서비스로 구성</span></div>
+        <div class="summary-card"><b>네이티브 앱</b><span>React Native WebView shell로 kduck.net을 Android 앱에 담음</span></div>
+        <div class="summary-card"><b>릴리스 준비</b><span>Google OAuth, notification, signing, AAB, 실제 기기 QA까지 확인</span></div>
+      </div>
+    
       </div>
     </section>
 
-    <section class="section" id="screens">
-      <aside class="section-label"><span>02</span>Visual Proof</aside>
-      <div>
-        <h2>실제 로컬 화면을 다시 캡처해, 사용자가 보는 흐름 그대로 배치했습니다.</h2>
-        <p class="lead">포트폴리오 레퍼런스에서 공통적으로 보이는 강점은 “무엇을 만들었는지”를 긴 설명보다 먼저 화면으로 증명하는 점이었습니다. 그래서 핵심 사용자 흐름과 운영 화면을 새로 캡처해 한 눈에 볼 수 있게 구성했습니다.</p>
-        <div class="image-grid">
-          <figure class="shot tall"><img src="images/kduck-01-splash-scan.png" alt="Dynamic splash scan screen" /><figcaption class="caption">첫 진입 스플래시. scan beam 모션과 decode 키워드 강조로 제품 메시지를 전달합니다.</figcaption></figure>
-          <figure class="shot tall"><img src="images/kduck-02-home-feed-pin.png" alt="Home vertical video feed with decoder pin sliver" /><figcaption class="caption">영상 피드. 자막/로마자/진행 바와 우측 decoder pin sliver가 함께 보입니다.</figcaption></figure>
-          <figure class="shot tall"><img src="images/kduck-04-decoder-reveal.png" alt="Scene decoder reveal panel" /><figcaption class="caption">Scene Decoder. 실제 의미와 “왜 이 장면이 와닿는지”를 카드로 풀어냅니다.</figcaption></figure>
-          <figure class="shot wide"><img src="images/kduck-05-my-room.png" alt="My Room editor" /><figcaption class="caption">My Room. 시청 이후 souvenir 수집과 방 꾸미기로 재방문 루프를 만듭니다.</figcaption></figure>
-          <figure class="shot wide"><img src="images/kduck-06-admin-overview.png" alt="Admin overview dashboard" /><figcaption class="caption">Admin Overview. 체험 참여, decoder 완료, room 진입, 재방문 빈도를 한 화면에서 봅니다.</figcaption></figure>
-          <figure class="shot wide"><img src="images/kduck-07-admin-content-review.png" alt="Admin content review panel" /><figcaption class="caption">Content Review. 실제 모바일 미리보기와 자막/decoder 수정 패널을 함께 제공합니다.</figcaption></figure>
+    
+    <section class="section ">
+      <div class="section-label">
+        <span>02</span>
+        <b>Role</b>
+      </div>
+      <div class="section-body">
+        <h2>내가 실제로 잡은 역할</h2>
+        
+      <div class="split">
+        <div class="panel">
+          <h3>제품 관점</h3>
+          <p>
+            사용자가 장면을 보고 끝내지 않도록 다음 행동을 만들었다. Decoder는 장면 이해를 깊게 만들고,
+            My Room은 학습한 장면을 수집 경험으로 바꾼다. 알림과 저장, 공유는 다시 돌아올 이유를 만드는 쪽으로 정리했다.
+          </p>
         </div>
+        <div class="panel">
+          <h3>개발 관점</h3>
+          <p>
+            React/Vite 화면, Cloudflare Pages Functions, D1 데이터 경계, WebView bridge,
+            native Google Sign-In, Android permission, release signing까지 이어지는 흐름을 직접 다뤘다.
+          </p>
+        </div>
+      </div>
+      <div class="tags">
+        <span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">Vite</span><span class="tag">Cloudflare Pages</span><span class="tag">D1</span><span class="tag">R2</span><span class="tag">HLS</span><span class="tag">React Native</span><span class="tag">WebView</span><span class="tag">Google OAuth</span><span class="tag">Firebase Messaging</span><span class="tag">Android Release QA</span>
+      </div>
+    
       </div>
     </section>
 
-    <section class="section" id="ux">
-      <aside class="section-label"><span>03</span>Product UX</aside>
-      <div>
-        <h2>“기능이 있다”보다 “보고 있는 중에도 쓰고 싶게 만든다”에 집중했습니다.</h2>
-        <p class="lead">K+DUCK의 핵심 기능은 영상 위에 얹히기 때문에, UI를 많이 보여주면 몰입이 깨지고 UI를 모두 숨기면 decoder를 발견하기 어렵습니다. 이 균형을 맞추기 위해 스플래시, decoder coach copy, pin sliver, swipe panel의 상태를 반복적으로 다듬었습니다.</p>
-        <div class="feature-row">
-          <div class="feature-image"><img src="images/kduck-03-decoder-panel.png" alt="Decoder panel opened by swipe" /></div>
-          <div class="card">
-            <h3>Decoder pin sliver</h3>
-            <p>영상 재생 중에는 UI를 최대한 숨기되, 우측 가장자리에 아주 얇은 노란 pin만 남겼습니다. 사용자가 화면을 터치해 UI가 보이는 상태가 되면 pin이 더 자연스럽게 나오고, 노란 영역을 스와이프하면 panel까지 함께 따라 나옵니다.</p>
-            <ul><li>영상 몰입을 유지하면서 기능 발견성을 잃지 않는 상태 설계</li><li>tap/visible state와 swipe-open state를 분리해 자연스러운 전환 구현</li><li>Subtext, K-context, K-wiki 탭으로 학습 깊이를 단계화</li></ul>
-          </div>
+    <div id="journey"></div>
+    
+    <section class="section ">
+      <div class="section-label">
+        <span>03</span>
+        <b>Journey</b>
+      </div>
+      <div class="section-body">
+        <h2>세 저장소를 거치며 제품이 달라진 방식</h2>
+        
+      <p class="lead">
+        같은 제품을 세 번 만든 것이 아니다. MVP2에서는 학습 루프를 빠르게 검증했고, kduck-home에서는 운영 가능한 서비스로
+        경계를 다시 세웠고, kduck_react에서는 앱으로 설치되는 순간 필요한 네이티브 책임을 분리했다.
+      </p>
+      <div class="journey">
+        <div class="journey-card" data-step="1">
+          <h3>MVP2 kduck</h3>
+          <p>장면 학습의 원형을 만든 단계. Scene Decoder, acting flow, 권한 요청, HLS 재생, 모바일 PWA 제약을 검증했다.</p>
         </div>
-        <div class="feature-row reverse">
-          <div class="card">
-            <h3>Dynamic splash scan</h3>
-            <p>첫 화면은 단순 로고 대신 “We decode the real K behind K-dramas beyond the subtitles”라는 제품 문장을 중심에 두고, decode 단어만 노란색으로 강조했습니다. 정적인 온보딩 대신 scan beam과 질감으로 “해석한다”는 제품 정체성을 바로 보여줍니다.</p>
-            <ul><li>JinJJa-K 노출을 K+DUCK 메시지로 교체해 브랜드 방향 정리</li><li>수평 scan beam과 배경 texture를 조정해 밋밋한 첫 진입을 개선</li><li>coach copy도 decoder 기능의 실제 사용 행위 중심으로 전면 수정</li></ul>
-          </div>
-          <div class="feature-image"><img src="images/kduck-01-splash-scan.png" alt="K+DUCK splash scan" /></div>
+        <div class="journey-card" data-step="2">
+          <h3>kduck-home</h3>
+          <p>실험 코드를 운영 서비스로 분리한 단계. 독립 DB, analytics, admin, content runtime, My Room, push 흐름을 정리했다.</p>
         </div>
+        <div class="journey-card" data-step="3">
+          <h3>kduck_react</h3>
+          <p>웹 제품을 Android 앱으로 감싼 단계. WebView 정책, Google 로그인, 알림 권한, 앱 이름, 서명, AAB 빌드까지 정리했다.</p>
+        </div>
+      </div>
+    
       </div>
     </section>
 
-    <section class="section" id="system">
-      <aside class="section-label"><span>04</span>System Design</aside>
-      <div>
-        <h2>앱 하나가 아니라, public surface와 운영 surface를 분리한 서비스 경계를 만들었습니다.</h2>
-        <p class="lead">README와 architecture 문서 기준으로 K+DUCK Home은 MVP2와 DB, admin, analytics, session, private media 리소스를 공유하지 않는 독립 서비스입니다. public app과 admin app은 Pages project/branch/domain을 분리하고, D1도 core/analytics/content로 책임을 나눴습니다.</p>
-        <div class="system">
-          <div class="card"><h3>Public App</h3><p>세로형 영상 피드, 자막, decoder, My Room, profile/legal/notification UX를 담당합니다.</p></div>
-          <div class="card"><h3>Pages Functions</h3><p>auth, content, analytics, avatar, landing health, client error ingest 같은 API layer를 처리합니다.</p></div>
-          <div class="card"><h3>Admin Console</h3><p>운영 지표, 콘텐츠 검수, 오류, 사용자, Push, UTM을 Cloudflare Access 뒤에서 관리합니다.</p></div>
-          <div class="card"><h3>D1 Core DB</h3><p>identity, guest state, progress, saved scenes, private media pointer, push state를 저장합니다.</p></div>
-          <div class="card"><h3>D1 Analytics/Sessions</h3><p>daily counter, visitor, session funnel, admin audit, client errors, tracking links를 분리 저장합니다.</p></div>
-          <div class="card"><h3>R2 / Workers</h3><p>raw event firehose, private uploads, scheduled retention, push automation을 담당합니다.</p></div>
-        </div>
-        <div class="callout">
-          <h3>이 구조를 선택한 이유</h3>
-          <p>실서비스에서 문제는 화면보다 경계에서 자주 생깁니다. public app과 admin console을 같은 프로젝트에 섞지 않고, MVP2의 기존 DB나 private media에 쓰지 않도록 차단한 이유도 이 때문입니다. 특히 content DB는 preview와 production binding을 분리하고, deploy preflight로 실수 가능성을 줄였습니다.</p>
-        </div>
+    
+    <section class="section page-break">
+      <div class="section-label">
+        <span>04</span>
+        <b>Prototype</b>
       </div>
-    </section>
-
-    <section class="section" id="admin">
-      <aside class="section-label"><span>05</span>Product Ops</aside>
-      <div>
-        <h2>운영자가 콘텐츠와 지표를 직접 다룰 수 있는 admin console을 만들었습니다.</h2>
-        <p class="lead">K+DUCK은 콘텐츠형 서비스라서 “좋은 화면”만으로는 부족합니다. 운영자는 어떤 장면에서 decoder가 열리는지, 어떤 UTM이 유입을 만드는지, 어느 client error가 자주 발생하는지, Push rule이 켜져 있는지 빠르게 확인해야 합니다.</p>
-        <div class="image-grid">
-          <figure class="shot wide"><img src="images/kduck-06-admin-overview.png" alt="Admin KPI overview" /><figcaption class="caption">KPI Overview: 참여율, decoder completion, My Room 진입, 재방문 빈도.</figcaption></figure>
-          <figure class="shot wide"><img src="images/kduck-08-admin-errors.png" alt="Admin client errors" /><figcaption class="caption">Client Errors: 운영자가 장애 후보를 빠르게 확인하고 상태를 관리하는 화면.</figcaption></figure>
-          <figure class="shot wide"><img src="images/kduck-10-admin-utm.png" alt="Admin UTM tracking" /><figcaption class="caption">UTM Tracking: campaign link와 유입 성과를 운영자가 직접 확인.</figcaption></figure>
-        </div>
-        <div class="split">
-          <div class="card">
-            <h3>콘텐츠 검수</h3>
-            <p>자막, romanized word, decoder JSON을 코드가 아니라 admin review panel에서 다룰 수 있도록 만들었습니다. 실제 모바일 미리보기와 편집 UI가 함께 있으므로, 운영자는 사용자가 볼 화면을 기준으로 수정 판단을 할 수 있습니다.</p>
+      <div class="section-body">
+        <h2>MVP2: 학습 루프의 뼈대를 만든 단계</h2>
+        
+      <div class="image-strip">
+        <div class="showcase"><img src="./images/mvp2-captured-decoder.png" alt="MVP2 decoder" /></div>
+        <div class="caption-box">
+          <div>
+            <h3>장면을 해석하게 만드는 화면</h3>
+            <p>
+              Decoder는 단어 뜻만 보여주는 사전이 아니라, 장면 안의 감정과 문화 맥락을 풀어주는 화면으로 설계했다.
+              Subtext, K-context, K-wiki를 나눠서 사용자가 “왜 이 대사가 중요한지”까지 이해하도록 만들었다.
+            </p>
           </div>
-          <div class="card">
-            <h3>Push 운영</h3>
-            <p>Android FCM 키 설정, 활성/무효 기기, 자동 Push rule, 수동 테스트 발송, 최근 발송 로그를 한 화면에서 확인하도록 구성했습니다. scheduled worker는 rule과 user state를 읽어 후보를 선정합니다.</p>
+          <div class="info-list">
+            <div class="info-row"><span>핵심 화면</span><strong>Scene Decoder / Acting</strong></div>
+            <div class="info-row"><span>어려웠던 점</span><strong>권한, 영상 재생, 단계별 route gate</strong></div>
+            <div class="info-row"><span>결과</span><strong>학습 루프 검증</strong></div>
           </div>
         </div>
       </div>
-    </section>
-
-    <section class="section" id="data">
-      <aside class="section-label"><span>06</span>Data Pipeline</aside>
-      <div>
-        <h2>D1에 모든 raw event를 쌓지 않고, 다시 재구축 가능한 분석 파이프라인으로 나눴습니다.</h2>
-        <p class="lead">이 프로젝트에서 가장 기술적으로 깊게 정리한 부분은 analytics writer입니다. 이전 MVP에서 단일 D1 DB가 커지는 문제를 겪었다는 전제를 두고, raw event, session funnel, daily rollup의 저장 위치를 분리했습니다.</p>
-        <div class="triple">
-          <div class="card">
-            <h3>R2 raw firehose</h3>
-            <p>product/action batch를 R2에 먼저 저장해, D1 write가 실패하더라도 재처리할 원본을 남깁니다.</p>
-          </div>
-          <div class="card">
-            <h3>D1 ingest ledger</h3>
-            <p>batch id와 SHA-256 guard로 같은 payload retry는 no-op 처리하고, 다른 payload overwrite는 차단합니다.</p>
-          </div>
-          <div class="card">
-            <h3>Sessions funnel</h3>
-            <p>event row를 무한히 쌓는 대신 session별 stage timestamp로 funnel을 압축해 저장합니다.</p>
-          </div>
-        </div>
-        <div class="split">
-          <div class="card">
-            <h3>정합성 방어</h3>
-            <ul><li>max 100 events, max 64KB body로 batch 크기 제한</li><li>allowlisted event name과 bounded-cardinality dimension만 수집</li><li>same batch id + different payload는 D1 write 전에 거부</li><li>ledger failed 상태는 자동 retry로 인한 double count를 막고 R2 source로 reconcile</li></ul>
-          </div>
-          <div class="card">
-            <h3>개인정보 경계</h3>
-            <ul><li>anonymous_id, session_id, user_id는 blind index로만 저장</li><li>free-form event properties는 ingest하지 않음</li><li>retention worker가 policy table 기준으로 chunked delete 수행</li><li>admin audit와 PII unlock 흐름을 별도 shared layer로 분리</li></ul>
-          </div>
-        </div>
+      <div class="points">
+        
+    <div class="point">
+      <h3>권한 요청을 흐름 안에 넣었다</h3>
+      <p>camera/mic 권한은 useEffect에서 몰래 요청하지 않고, 사용자의 명시적인 버튼 행동 안에서 처리하도록 정리했다.</p>
+    </div>
+        
+    <div class="point">
+      <h3>Acting record를 상태머신으로 정리했다</h3>
+      <p>ready, recording, stopped 상태를 한 화면에서 관리해 녹화 전후 UI가 흔들리지 않게 만들었다.</p>
+    </div>
+        
+    <div class="point">
+      <h3>HLS 재생 경로를 분리했다</h3>
+      <p>Safari는 native HLS, Android/Chrome 계열은 hls.js로 처리해 미디어 재생 실패 범위를 줄였다.</p>
+    </div>
+        
+    <div class="point">
+      <h3>직접 URL 진입을 제어했다</h3>
+      <p>scene 단계별 route gate를 두어 사용자가 잘못된 단계로 들어가도 흐름이 깨지지 않도록 했다.</p>
+    </div>
+      </div>
+    
       </div>
     </section>
 
-    <section class="section" id="security">
-      <aside class="section-label"><span>07</span>Security</aside>
-      <div>
-        <h2>운영 콘솔은 “로그인되어 보이면 통과”가 아니라, fail-closed gate로 막았습니다.</h2>
-        <p class="lead">Admin API는 콘텐츠, 사용자, Push, tracking link를 다루기 때문에 화면보다 요청 경계가 중요합니다. 공통 `requireAdmin` layer에서 Access JWT, allowlist, role, CSRF, audit를 통과하지 않으면 요청이 진행되지 않도록 구성했습니다.</p>
-        <div class="triple">
-          <div class="card"><h3>Access JWT</h3><p>`jose.createRemoteJWKSet`로 Cloudflare Access JWT를 검증하고 issuer/audience/exp/nbf를 확인합니다.</p></div>
-          <div class="card"><h3>Allowlist & Role</h3><p>admin_allowlist의 email/role을 기준으로 viewer/admin/owner 권한을 나눕니다.</p></div>
-          <div class="card"><h3>CSRF & Audit</h3><p>write path는 X-CSRF, Origin, Sec-Fetch-Site를 검사하고 denial/action audit를 남깁니다.</p></div>
+    
+    <section class="section ">
+      <div class="section-label">
+        <span>05</span>
+        <b>Service</b>
+      </div>
+      <div class="section-body">
+        <h2>kduck-home: 운영 가능한 웹 서비스로 다시 세운 단계</h2>
+        
+      <div class="image-strip">
+        <div class="showcase"><img src="./images/kduck-home-live-mobile.png" alt="kduck.net live mobile screen" /></div>
+        <div class="caption-box">
+          <div>
+            <h3>첫 화면은 바로 제품이어야 했다</h3>
+            <p>
+              landing 설명보다 실제 사용 경험이 먼저 보여야 했다. 그래서 첫 화면부터 세로 영상, 자막, Decoder 진입,
+              알림 상태가 보이게 구성했다. 사용자가 무엇을 하는 서비스인지 한 번에 알 수 있어야 했다.
+            </p>
+          </div>
+          <div class="info-list">
+            <div class="info-row"><span>서비스</span><strong>kduck.net</strong></div>
+            <div class="info-row"><span>운영 경계</span><strong>kduck_home_* DB</strong></div>
+            <div class="info-row"><span>보조 경험</span><strong>My Room / Notifications / Profile</strong></div>
+          </div>
         </div>
-        <div class="callout">
-          <h3>업로드 보안까지 같이 봤습니다</h3>
-          <p>avatar upload에서는 확장자만 믿지 않고 magic-byte sniffing으로 이미지 타입을 확인합니다. private R2에 object를 저장하고, 현재 avatar pointer만 DB에 유지하며 이전 object를 정리하는 방식으로 보관 범위도 줄였습니다.</p>
+      </div>
+      <div class="split">
+        <div class="panel">
+          <h3>분리한 것</h3>
+          <ul>
+            <li>MVP2 DB와 kduck-home DB를 섞지 않음</li>
+            <li>public app, admin app, push worker의 책임을 분리</li>
+            <li>public media는 MVP2 origin에서 read-only로만 사용</li>
+          </ul>
         </div>
+        <div class="panel dark">
+          <h3>좋아진 것</h3>
+          <ul>
+            <li>웹 릴리스와 앱 릴리스의 책임선이 명확해짐</li>
+            <li>analytics/admin/push를 운영 기능으로 다룰 수 있게 됨</li>
+            <li>학습 행동을 My Room 수집 루프로 연결할 수 있게 됨</li>
+          </ul>
+        </div>
+      </div>
+    
       </div>
     </section>
 
-    <section class="section" id="stories">
-      <aside class="section-label"><span>08</span>Problem Solving</aside>
-      <div>
-        <h2>면접에서 설명하기 좋은 문제 해결 소재를 원인과 해결 방식까지 정리했습니다.</h2>
-        <div class="story">
-          <div class="story-label">UX Discovery</div>
-          <div><h3>영상 중 decoder가 완전히 사라지는 문제</h3><p>재생 중 UI를 다 숨기면 몰입감은 좋아지지만 핵심 기능을 발견하기 어렵습니다. 그래서 노란 pin sliver만 남기고, 화면 터치로 UI가 보일 때는 pin이 더 나오며, 스와이프하면 panel이 함께 열리도록 상태를 나눴습니다.</p></div>
+    
+    <section class="section page-break">
+      <div class="section-label">
+        <span>06</span>
+        <b>Native</b>
+      </div>
+      <div class="section-body">
+        <h2>kduck_react: 앱으로 설치되는 순간 필요한 것들</h2>
+        
+      <div class="image-strip">
+        <div class="showcase"><img src="./images/jinjja-k-android-notifications.png" alt="Android notifications screen" /></div>
+        <div class="caption-box">
+          <div>
+            <h3>웹을 그대로 담되, 앱의 책임은 앱이 맡는다</h3>
+            <p>
+              kduck_react는 kduck.net을 다시 구현하지 않는다. 대신 WebView 정책, 네이티브 로그인, 알림 권한,
+              Android 뒤로가기, 앱 이름, release signing처럼 설치형 앱에서만 필요한 책임을 맡는다.
+            </p>
+          </div>
+          <div class="info-list">
+            <div class="info-row"><span>앱 이름</span><strong>JinJJa-K</strong></div>
+            <div class="info-row"><span>패키지</span><strong>com.jinjjak.app</strong></div>
+            <div class="info-row"><span>화면 방향</span><strong>Portrait 고정</strong></div>
+          </div>
         </div>
-        <div class="story">
-          <div class="story-label">Data Scale</div>
-          <div><h3>D1 raw event 누적 리스크</h3><p>모든 이벤트를 D1에 row 단위로 쌓으면 DB 파일이 계속 커지는 문제가 생길 수 있습니다. raw는 R2, session funnel은 별도 D1, daily rollup은 analytics D1로 나누고 retention worker를 둬 구조적으로 해결했습니다.</p></div>
-        </div>
-        <div class="story">
-          <div class="story-label">Ops Security</div>
-          <div><h3>어드민 콘솔의 민감 기능 보호</h3><p>지표 조회뿐 아니라 콘텐츠 수정, Push 발송, tracking link 생성이 가능한 콘솔이기 때문에 Access JWT만으로 충분하지 않다고 판단했습니다. allowlist, role, CSRF, audit를 공통 gate로 묶어 fail-closed 흐름을 만들었습니다.</p></div>
-        </div>
-        <div class="story">
-          <div class="story-label">Content Ops</div>
-          <div><h3>콘텐츠 검수 비용 문제</h3><p>자막/decoder 데이터와 실제 모바일 화면이 분리되어 있으면 운영자가 수정 결과를 상상해야 합니다. 그래서 review panel에 모바일 preview와 편집 UI를 함께 배치해, 사용자가 보는 화면 기준으로 콘텐츠 품질을 판단하게 만들었습니다.</p></div>
-        </div>
+      </div>
+      <div class="points">
+        
+    <div class="point">
+      <h3>Google 로그인</h3>
+      <p>WebView OAuth가 아니라 native Google Sign-In으로 idToken을 받고, /api/auth/google/native에서 웹 세션으로 교환했다.</p>
+    </div>
+        
+    <div class="point">
+      <h3>알림 권한</h3>
+      <p>권한 팝업이 떠 있을 때 WebView가 뒤에서 먼저 진행하지 않도록 startup gate를 뒀다.</p>
+    </div>
+        
+    <div class="point">
+      <h3>뒤로가기</h3>
+      <p>웹의 현재 탭/상태를 native shell에 알려 Android hardware back이 앱 종료로 튀지 않게 했다.</p>
+    </div>
+        
+    <div class="point">
+      <h3>릴리스 준비</h3>
+      <p>debug, release/upload, Play App Signing SHA-1을 나눠 OAuth client와 Firebase 설정을 맞췄다.</p>
+    </div>
+      </div>
+    
       </div>
     </section>
 
-    <section class="section" id="resume">
-      <aside class="section-label"><span>09</span>Resume Ready</aside>
-      <div>
-        <h2>이력서에 넣을 때는 “화면 구현”보다 “제품 흐름과 운영 구조를 만들었다”로 말할 수 있습니다.</h2>
-        <div class="resume">
-          <h3>프로젝트 한 줄</h3>
-          <p>K-drama 숏폼 장면에 자막, 문화 맥락 decoder, 수집형 My Room, 운영 어드민, analytics/push pipeline을 결합한 K+DUCK vertical learning platform을 React/TypeScript와 Cloudflare stack으로 구현.</p>
-          <h3 style="margin-top: 24px;">이력서 bullet</h3>
-          <ul><li>React 19 + Vite 기반 public app/admin console을 workspace로 분리하고, 영상 feed, Scene Decoder, My Room, 운영 지표 화면을 구현</li><li>영상 재생 중 decoder pin sliver를 남기고 swipe-open panel을 구현해 몰입감과 기능 발견성을 동시에 개선</li><li>Cloudflare Pages Functions, D1, R2, Workers로 auth/content/analytics/push 경계를 나누고 deploy preflight 구조를 구성</li><li>D1 용량 한계를 고려해 R2 raw event, sessions DB, analytics rollup DB로 write path를 재설계하고 idempotent ingest를 구현</li><li>Cloudflare Access JWT, admin allowlist, role, CSRF, audit, avatar magic-byte validation으로 운영/개인정보 보안 레이어를 강화</li><li>콘텐츠 검수 어드민과 Push automation panel을 구현해 운영자가 콘텐츠 품질과 리텐션 메시지를 직접 관리할 수 있게 함</li></ul>
+    <div id="work"></div>
+    
+    <section class="section ">
+      <div class="section-label">
+        <span>07</span>
+        <b>Implementation</b>
+      </div>
+      <div class="section-body">
+        <h2>기술적으로 기억할 만한 결정들</h2>
+        
+      <div class="split">
+        <div class="panel">
+          <h3>1. 웹과 앱의 경계를 섞지 않았다</h3>
+          <p>
+            웹은 콘텐츠와 사용자 경험을 빠르게 바꿀 수 있어야 하고, 앱은 설치형 환경에서 필요한 권한과 OS 연동을 안정적으로 처리해야 했다.
+            그래서 WebView 안의 UI를 네이티브로 다시 만들지 않고, bridge와 정책만 앱에 남겼다.
+          </p>
         </div>
+        <div class="panel">
+          <h3>2. 권한 팝업이 제품 흐름을 망치지 않게 했다</h3>
+          <p>
+            알림 권한 팝업이 뜬 동안 splash, autoplay, coach가 뒤에서 먼저 지나가면 사용자는 시작부터 맥락을 잃는다.
+            앱 시작 단계에서 기다려야 하는 상태를 분명히 잡고, 화면 레이어도 팝업이 위에 뜬 것처럼 보이게 정리했다.
+          </p>
+        </div>
+        <div class="panel">
+          <h3>3. 로그인 실패 원인을 서명 단위로 쪼갰다</h3>
+          <p>
+            Google 로그인은 코드만 봐서는 원인이 잘 안 보인다. debug build, sideload release, Play install의 SHA-1이 다르기 때문에
+            각각 OAuth client/Firebase 설정을 분리해서 맞췄다.
+          </p>
+        </div>
+        <div class="panel">
+          <h3>4. QA는 실제 설치 기준으로 봤다</h3>
+          <p>
+            local preview와 release install은 같은 결과를 보장하지 않는다. 그래서 연결된 Android 기기에 앱을 다시 설치하고,
+            권한 팝업, Google login, notification 화면, release artifact를 따로 확인했다.
+          </p>
+        </div>
+      </div>
+    
+      </div>
+    </section>
+
+    <div id="screens"></div>
+    
+    <section class="section page-break">
+      <div class="section-label">
+        <span>08</span>
+        <b>Screens</b>
+      </div>
+      <div class="section-body">
+        <h2>화면으로 보는 결과물</h2>
+        
+      <div class="gallery">
+        
+    <figure class="shot ">
+      <div class="shot-media"><img src="./images/mvp2-captured-decoder.png" alt="MVP2 / Scene Decoder" /></div>
+      <figcaption>
+        <strong>MVP2 / Scene Decoder</strong>
+        <span>장면 속 대사와 숨은 의미를 학습 화면으로 풀어낸 첫 버전.</span>
+      </figcaption>
+    </figure>
+        
+    <figure class="shot ">
+      <div class="shot-media"><img src="./images/mvp2-captured-acting-record.png" alt="MVP2 / Acting Record" /></div>
+      <figcaption>
+        <strong>MVP2 / Acting Record</strong>
+        <span>사용자가 대사를 따라 말하는 흐름. ready 상태와 녹화 CTA가 중심이다.</span>
+      </figcaption>
+    </figure>
+        
+    <figure class="shot ">
+      <div class="shot-media"><img src="./images/mvp2-captured-acting-role.png" alt="MVP2 / Role Select" /></div>
+      <figcaption>
+        <strong>MVP2 / Role Select</strong>
+        <span>연기할 캐릭터와 난이도를 고르는 단계.</span>
+      </figcaption>
+    </figure>
+        
+    <figure class="shot ">
+      <div class="shot-media"><img src="./images/kduck-home-live-mobile.png" alt="kduck-home / Live Feed" /></div>
+      <figcaption>
+        <strong>kduck-home / Live Feed</strong>
+        <span>실제 kduck.net 첫 화면. 영상, 자막, Decoder 진입이 한 화면에 보인다.</span>
+      </figcaption>
+    </figure>
+        
+    <figure class="shot ">
+      <div class="shot-media"><img src="./images/kduck-home-local-room.png" alt="kduck-home / My Room" /></div>
+      <figcaption>
+        <strong>kduck-home / My Room</strong>
+        <span>학습한 장면을 souvenir와 방 꾸미기 경험으로 연결한 화면.</span>
+      </figcaption>
+    </figure>
+        
+    <figure class="shot ">
+      <div class="shot-media"><img src="./images/jinjja-k-android-notifications.png" alt="kduck_react / Android Notifications" /></div>
+      <figcaption>
+        <strong>kduck_react / Android Notifications</strong>
+        <span>실제 Android 기기에서 캡처한 JinJJa-K 알림 화면.</span>
+      </figcaption>
+    </figure>
+      </div>
+    
+      </div>
+    </section>
+
+    <div id="release"></div>
+    
+    <section class="section ">
+      <div class="section-label">
+        <span>09</span>
+        <b>Release</b>
+      </div>
+      <div class="section-body">
+        <h2>출시 준비에서 확인한 것</h2>
+        
+      <p class="lead">
+        이 프로젝트는 화면을 만드는 데서 끝나지 않았다. 앱 이름, 패키지명, OAuth client, SHA-1, Firebase,
+        AAB 산출물, 실제 기기 설치까지 이어져야 “앱으로 낼 수 있는 상태”라고 볼 수 있었다.
+      </p>
+      <div class="stacked">
+        <div class="evidence">Native app
+- display name: JinJJa-K
+- package: com.jinjjak.app
+- main activity: com.kduck.home.MainActivity
+- web origin: https://kduck.net
+- orientation: portrait
+
+Auth / release
+- native Google Sign-In enabled
+- /api/auth/google/native session exchange
+- debug SHA-1, release/upload SHA-1, Play App Signing SHA-1 분리 등록
+- bundleRelease / app-release.aab 생성
+- 연결된 Android 기기에서 release install과 Google login 확인</div>
+      </div>
+    
+      </div>
+    </section>
+
+    
+    <section class="section ">
+      <div class="section-label">
+        <span>10</span>
+        <b>Takeaway</b>
+      </div>
+      <div class="section-body">
+        <h2>이 프로젝트에서 보여주고 싶은 역량</h2>
+        
+      <div class="points">
+        
+    <div class="point">
+      <h3>제품의 모양을 코드 구조로 옮기는 능력</h3>
+      <p>학습 루프, 운영 웹, 네이티브 앱을 같은 제품 안에서 연결하되 책임은 분리했다.</p>
+    </div>
+        
+    <div class="point">
+      <h3>문제를 경계별로 나누는 능력</h3>
+      <p>로그인 문제를 앱 코드, WebView 세션, OAuth client, 서명 SHA, Firebase 설정으로 나눠 확인했다.</p>
+    </div>
+        
+    <div class="point">
+      <h3>실제 환경에서 끝까지 확인하는 습관</h3>
+      <p>브라우저 캡처, 로컬 preview, 연결된 Android 기기, release artifact를 따로 확인했다.</p>
+    </div>
+        
+    <div class="point">
+      <h3>사용자 흐름을 놓치지 않는 구현</h3>
+      <p>권한 팝업, 뒤로가기, 알림, My Room처럼 작아 보이는 순간이 전체 경험을 망치지 않게 정리했다.</p>
+    </div>
+      </div>
+    
       </div>
     </section>
   </main>
 
-  <footer class="footer">
-    <p><strong>Snapshot.</strong> kduck-home local project, branch codex/web-edit-20260629, HEAD f37db28 기준으로 작성. 화면 이미지는 2026-06-30 로컬 preview에서 직접 캡처했습니다.</p>
-    <p class="print-note">이 문서는 HTML 버전을 기준으로 PDF 렌더링되었습니다.</p>
+  <footer class="closing">
+    <div>
+      <h2>JinJJa-K는 실험을 서비스로 바꾼 프로젝트다.</h2>
+      <p>
+        MVP2에서 시작한 장면 학습 아이디어를 운영 가능한 웹 서비스로 분리하고,
+        다시 Android 앱 출시 흐름까지 이어 붙였다. 이 과정에서 가장 중요했던 것은
+        “무엇을 어디서 책임질지”를 끝까지 흐리지 않는 일이었다.
+      </p>
+    </div>
+    <div class="closing-card">
+      <b>최종 산출물</b>
+      <span>kduck.net 기반 웹 서비스, JinJJa-K Android shell, Google 로그인/알림/릴리스 QA 흐름, 직접 캡처한 화면 증거</span>
+    </div>
   </footer>
 </body>
 </html>
