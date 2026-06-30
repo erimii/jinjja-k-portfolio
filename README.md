@@ -1,27 +1,31 @@
-# JinJJa-K / K+DUCK Home Development Portfolio
+# K+DUCK MVP2 Development Portfolio
 
-Final submission portfolio for the K+DUCK Home project.
+K-drama scene learning portfolio for Yerim Lee.
 
 ## Live
 
 - K+DUCK Home portfolio: https://erimii.github.io/jinjja-k-portfolio/
-- K+DUCK Home PDF: [JinJJa-K-Portfolio.pdf](./JinJJa-K-Portfolio.pdf)
+- K+DUCK Home original PDF: [JinJJa-K-Portfolio.pdf](./JinJJa-K-Portfolio.pdf)
+- K+DUCK Home separate case study HTML: [KDUCK-Home-Portfolio.html](./KDUCK-Home-Portfolio.html)
+- K+DUCK Home separate case study PDF: [KDUCK-Home-Portfolio.pdf](./KDUCK-Home-Portfolio.pdf)
 - MVP2 case study: https://erimii.github.io/jinjja-k-portfolio/mvp2/
 - MVP2 PDF: [mvp2/KDUCK_MVP2_Final_Portfolio.pdf](./mvp2/KDUCK_MVP2_Final_Portfolio.pdf)
 
-## Additional Project Portfolio
+## Included
 
-- MVP2 case study: [mvp2/index.html](./mvp2/index.html)
-- MVP2 PDF: [mvp2/KDUCK_MVP2_Final_Portfolio.pdf](./mvp2/KDUCK_MVP2_Final_Portfolio.pdf)
+- Long-form case study HTML
+- PDF export
+- Local screenshots captured from the current app route state
+- Resume-ready bullets and long-form project description
 
-## What This Covers
+## Project Focus
 
-- K+DUCK public vertical video app
-- Scene Decoder interaction and copy/motion polish
-- My Room souvenir retention loop
-- Admin console for analytics, content review, client errors, push, and UTM
-- Cloudflare D1/R2/Workers analytics and push architecture
-- Admin security boundary: Access JWT, allowlist, role, CSRF, audit
+- React/TypeScript scene learning flow
+- Content manifest, subtitle timing, romanization, acting line metadata
+- Browser media APIs: getUserMedia and MediaRecorder
+- PWA cache, R2 media path, Cloudflare Pages/Functions QA
+- Local/dev/Android WebView runtime boundary debugging
+- K+DUCK Home public app, admin console, analytics pipeline, push automation, and security boundary
 
 ## Files
 
@@ -30,6 +34,8 @@ Final submission portfolio for the K+DUCK Home project.
 ├── README.md
 ├── index.html
 ├── JinJJa-K-Portfolio.pdf
+├── KDUCK-Home-Portfolio.html
+├── KDUCK-Home-Portfolio.pdf
 ├── images/
 └── mvp2/
     ├── index.html
