@@ -1,36 +1,23 @@
-# JinJJa-K Project Portfolio
+# K+DUCK MVP2 Development Portfolio
 
-K-drama scene learning product portfolio covering the flow from MVP2 kduck to kduck-home and the JinJJa-K Android shell.
+K-drama scene learning PWA portfolio for Yerim Lee.
 
 ## Live
 
 - Portfolio: https://erimii.github.io/jinjja-k-portfolio/
 - PDF: [JinJJa-K-Portfolio.pdf](./JinJJa-K-Portfolio.pdf)
 
-## What This Covers
+## Included
 
-- MVP2 kduck: scene learning loop, Scene Decoder, acting flow, media/permission constraints
-- kduck-home: production web service boundary, vertical feed, My Room, analytics/admin/push surfaces
-- kduck_react: Android WebView shell, native Google Sign-In, notification permission, release QA
+- Long-form case study HTML
+- PDF export
+- Local screenshots captured from the current MVP2 app route state
+- Resume-ready bullets and long-form project description
 
-## Key Contributions
+## Project Focus
 
-- Designed the product flow from scene watching to decoding, acting, saving, and returning.
-- Split the experimental MVP surface into a production web service with clearer runtime boundaries.
-- Connected the web app to an Android shell without duplicating the web UI in native code.
-- Verified release-sensitive details including OAuth clients, signing SHA-1 values, permissions, and device QA.
-
-## Files
-
-```text
-.
-├── README.md
-├── index.html
-├── JinJJa-K-Portfolio.pdf
-├── images/
-└── .gitignore
-```
-
-## Stack
-
-React, TypeScript, Vite, Cloudflare Pages, D1, R2, HLS, React Native, WebView, Google OAuth, Firebase Messaging.
+- React/TypeScript scene learning flow
+- Content manifest, subtitle timing, romanization, acting line metadata
+- Browser media APIs: getUserMedia and MediaRecorder
+- PWA cache, R2 media path, Cloudflare Pages/Functions QA
+- Local/dev/Android WebView runtime boundary debugging
