@@ -4,9 +4,10 @@ Final submission portfolio for the K+DUCK Home project.
 
 ## Live
 
-- Portfolio: https://erimii.github.io/jinjja-k-portfolio/
-- PDF: [JinJJa-K-Portfolio.pdf](./JinJJa-K-Portfolio.pdf)
-
+- K+DUCK Home portfolio: https://erimii.github.io/jinjja-k-portfolio/
+- K+DUCK Home PDF: [JinJJa-K-Portfolio.pdf](./JinJJa-K-Portfolio.pdf)
+- MVP2 case study: https://erimii.github.io/jinjja-k-portfolio/mvp2/
+- MVP2 PDF: [mvp2/KDUCK_MVP2_Final_Portfolio.pdf](./mvp2/KDUCK_MVP2_Final_Portfolio.pdf)
 
 ## Additional Project Portfolio
 
@@ -29,7 +30,11 @@ Final submission portfolio for the K+DUCK Home project.
 ├── README.md
 ├── index.html
 ├── JinJJa-K-Portfolio.pdf
-└── images/
+├── images/
+└── mvp2/
+    ├── index.html
+    ├── KDUCK_MVP2_Final_Portfolio.pdf
+    └── images/
 ```
 
 ## Stack
