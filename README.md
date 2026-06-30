@@ -1,23 +1,31 @@
-# K+DUCK MVP2 Development Portfolio
+# JinJJa-K / K+DUCK Home Development Portfolio
 
-K-drama scene learning PWA portfolio for Yerim Lee.
+Final submission portfolio for the K+DUCK Home project.
 
 ## Live
 
 - Portfolio: https://erimii.github.io/jinjja-k-portfolio/
 - PDF: [JinJJa-K-Portfolio.pdf](./JinJJa-K-Portfolio.pdf)
 
-## Included
+## What This Covers
 
-- Long-form case study HTML
-- PDF export
-- Local screenshots captured from the current MVP2 app route state
-- Resume-ready bullets and long-form project description
+- K+DUCK public vertical video app
+- Scene Decoder interaction and copy/motion polish
+- My Room souvenir retention loop
+- Admin console for analytics, content review, client errors, push, and UTM
+- Cloudflare D1/R2/Workers analytics and push architecture
+- Admin security boundary: Access JWT, allowlist, role, CSRF, audit
 
-## Project Focus
+## Files
 
-- React/TypeScript scene learning flow
-- Content manifest, subtitle timing, romanization, acting line metadata
-- Browser media APIs: getUserMedia and MediaRecorder
-- PWA cache, R2 media path, Cloudflare Pages/Functions QA
-- Local/dev/Android WebView runtime boundary debugging
+```text
+.
+├── README.md
+├── index.html
+├── JinJJa-K-Portfolio.pdf
+└── images/
+```
+
+## Stack
+
+React, TypeScript, Vite, Cloudflare Pages Functions, D1, R2, Workers, HLS, FCM Push, Cloudflare Access.
